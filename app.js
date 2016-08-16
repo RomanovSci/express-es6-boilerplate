@@ -51,7 +51,7 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 /**
  * Setup middlewares
  */
-require('./middleware')(app);
+require('./middlewares')(app);
 
 /**
  * Setup controllers
