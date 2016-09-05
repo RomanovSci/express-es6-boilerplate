@@ -1,6 +1,5 @@
-let
-  express = require('express'),
-  router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 /**
  * Main controllers module
@@ -8,7 +7,7 @@ let
  */
 module.exports = () => {
 
-  router.get('/', (req, res, next) => {
+  router.get('/', function(req, res, next) {
     res.render('index', {
       title: 'Express ES6 Boilerplate'
     });
@@ -17,6 +16,6 @@ module.exports = () => {
   /**
    * Connect other controllers here
    */
-
+   
   return router;
 };

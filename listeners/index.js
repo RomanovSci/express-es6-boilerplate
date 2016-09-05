@@ -3,7 +3,7 @@
  * @param  {Object} debug Debug instance
  * @return {none}
  */
-module.exports = (debug, server, port) => {
+module.exports = function(debug, server, port) {
 
   return {
     
@@ -16,10 +16,9 @@ module.exports = (debug, server, port) => {
         throw error;
       }
 
-      var 
-        bind = typeof port === 'string'
-          ? 'Pipe ' + port
-          : 'Port ' + port;
+      let bind = typeof port === 'string'
+        ? 'Pipe ' + port
+        : 'Port ' + port;
 
       // Handle specific listen errors with friendly messages
       switch (error.code) {
@@ -42,12 +41,11 @@ module.exports = (debug, server, port) => {
      * Event listener for HTTP server "listening" event.
      */
     onListening: () => {
-      var 
-        addr = server.address(),
-        bind = typeof addr === 'string'
-          ? 'pipe ' + addr
-          : 'port ' + addr.port;
-      
+      let addr = server.address();
+      let bind = typeof addr === 'string'
+        ? 'pipe ' + addr
+        : 'port ' + addr.port;
+    
       debug('Listening on ' + bind);
     }
   };

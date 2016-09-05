@@ -11,12 +11,11 @@ import createDebugInstance from 'debug';
 import getListeners from './listeners';
 import config from './config';
 
-let 
-  port = stringHelper.normalizePort(process.env.PORT || config.get('port')),
-  debug = createDebugInstance('testing-server:server'),
-  app = express(),
-  server = http.createServer(app),
-  listeners = getListeners(debug, server, port);
+let port = stringHelper.normalizePort(process.env.PORT || config.get('port'));
+let debug = createDebugInstance('testing-server:server');
+let app = express();
+let server = http.createServer(app);
+let listeners = getListeners(debug, server, port);
 
 /**
  * Set port
