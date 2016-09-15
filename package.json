@@ -23,6 +23,6 @@
     "robots.txt": "1.1.0",
     "serve-favicon": "~2.3.0"
   },
-  "preferGlobal": false,
-  "private": true
+  "repository": "romanovsci/express-es6-boilerplate",
+  "license": "MIT"
 }
