@@ -55,7 +55,7 @@ require('./middlewares')(app);
 /**
  * Setup controllers
  */
-app.use(require('./controllers')());
+app.use(require('./routes')());
 
 /**
  * Setup error handlers

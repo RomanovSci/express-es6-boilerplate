@@ -2,20 +2,15 @@ const express = require('express');
 const router  = express.Router();
 
 /**
- * Main controllers module
+ * Main routes module
  * @return {Object} Router instance
  */
 module.exports = function() {
 
-  router.get('/', function(req, res, next) {
-    res.render('index', {
-      title: 'Express ES6 Boilerplate'
-    });
-  });
+  router.get('/', require('../controllers/main'));
 
   /**
    * Connect other controllers here
    */
-   
   return router;
 };
