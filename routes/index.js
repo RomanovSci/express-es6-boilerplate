@@ -11,7 +11,7 @@ const routesConfig = {
 };
 
 /**
- * Set up routest and return 
+ * Set up routes and return 
  * Express Router object
  * @type {Object}
  */
