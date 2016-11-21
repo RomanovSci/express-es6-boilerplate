@@ -53,9 +53,9 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 require('./middlewares')(app);
 
 /**
- * Setup controllers
+ * Setup routes
  */
-app.use(require('./routes')());
+app.use(require('./routes'));
 
 /**
  * Setup error handlers

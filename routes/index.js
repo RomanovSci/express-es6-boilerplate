@@ -1,16 +1,18 @@
-const express = require('express');
-const router  = express.Router();
+/**
+ * Routes config
+ * @type {Object}
+ */
+const routesConfig = {
+  '/': {
+    methods:    ['GET', 'POST'],
+    controller: 'main',
+    action:     'index'
+  }
+};
 
 /**
- * Main routes module
- * @return {Object} Router instance
+ * Set up routest and return 
+ * Express Router object
+ * @type {Object}
  */
-module.exports = function() {
-
-  router.get('/', require('../controllers/main'));
-
-  /**
-   * Connect other controllers here
-   */
-  return router;
-};
+module.exports = require('./bootstrap')(routesConfig); 
