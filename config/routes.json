@@ -1,0 +1,7 @@
+{
+  "MainController" : {
+    "index" : {
+      "/" : ["GET", "POST"]
+    }
+  }
+}
