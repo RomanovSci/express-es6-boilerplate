@@ -8,7 +8,7 @@ import bodyParser from 'body-parser';
 import robots from 'robots.txt';
 import stringHelper from './helpers/stringHelper';
 import createDebugInstance from 'debug';
-import getListeners from './listeners';
+import getListeners from './helpers/listeners';
 import config from './config';
 
 let port = stringHelper.normalizePort(process.env.PORT || config.get('port'));

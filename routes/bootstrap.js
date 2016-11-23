@@ -1,43 +1,89 @@
-const express = require('express');
-const Router  = express.Router();
-
 /**
- * Path to controllers
- * @type {String}
+ * Configurating all routes
+ * in app by routes config
+ * 
+ * @param {Object} routesConfig
  */
-const controllersPath = '../controllers/';
+class RouterConfigurator {
 
-/**
- * Set up routes
- * @param  {Object} routeConfig 
- * @return {Object} Express Router object
- */
-module.exports = function(routesConfig) {
-  
+  constructor(routesConfig) {
+
+    this.controllersBasePath = '../controllers/';
+
+    this.routesConfig = routesConfig;
+
+    this.routerInstance = require('express').Router();
+
+    this.controllersMap = {};
+
+    this.init();
+  }
+
   /**
-   * Bind routes 
-   * to router object
+   * Initialization
+   * @return {none}
    */
-  Object.keys(routesConfig).map(function(route, index) {
-    routesConfig[route].methods.forEach(function(method) {
+  init() {
 
-      /**
-       * Converted method
-       * @type {String}
-       */
-      let _m = method.toLowerCase();
+    /**
+     * Booting all controllers
+     * and bind action to Express
+     * Router Object
+     */
+    Object.keys(this.routesConfig).map((controllerName) => {
       
       /**
-       * Bind method, route,
-       * controller and action
-       * to Express Router object
+       * Save controller 
+       * instance
        */
-      Router[_m](
-        route, 
-        require(`${controllersPath}${routesConfig[route].controller}`)[routesConfig[route].action]
-      );
-    })
-  });
+      this.controllersMap[controllerName] = require(`${this.controllersBasePath}${controllerName}`);
 
-  return Router;
+      /**
+       * Bind current controller 
+       * actions to Router instance
+       */
+      Object.keys(this.routesConfig[controllerName]).map((action) => {
+        let actionFunction = this.controllersMap[controllerName][action];
+
+        if(typeof actionFunction !== 'function') {
+          throw new Error(`Action ${action} in ${controllerName} does not exist`);
+        }
+
+        /**
+         * Bind routes to 
+         * Router instance
+         */
+        Object.keys(this.routesConfig[controllerName][action]).map((route) => {
+          let methods = this.routesConfig[controllerName][action][route];
+
+          if(!(methods instanceof Array)) {
+            throw new Error(`Methods in routesConfig for ${controllerName}.${action}.${route} must be Array`);
+          }
+
+          methods.forEach((method) => {
+            let _m = method.toLowerCase();
+            
+            this.routerInstance[_m](route, actionFunction);
+          });
+        });
+      });
+    });
+  }
+}
+
+module.exports = function(routesConfig) {
+
+  /**
+   * Return empty 
+   * Router instance
+   */
+  if(!routesConfig) {
+    return require('express').Router();
+  }
+
+  /**
+   * Return configurated
+   * Router instance
+   */
+  return new RouterConfigurator(routesConfig).routerInstance;
 };

@@ -2,11 +2,11 @@
  * Routes config
  * @type {Object}
  */
-const routesConfig = {
-  '/': {
-    methods:    ['GET', 'POST'],
-    controller: 'main',
-    action:     'index'
+ const routesConfig = {
+  'MainController': {
+    'index': {
+      '/' : ['GET', 'POST']
+    }
   }
 };
 
@@ -15,4 +15,4 @@ const routesConfig = {
  * Express Router object
  * @type {Object}
  */
-module.exports = require('./bootstrap')(routesConfig); 
+ module.exports = require('./bootstrap')(routesConfig); 
