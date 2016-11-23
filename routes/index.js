@@ -10,4 +10,4 @@ module.exports = require('./bootstrap')(
    * object
    */
   require('../config/routes.json')
-); 
+);
