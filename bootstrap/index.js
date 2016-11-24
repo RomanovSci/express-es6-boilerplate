@@ -1,4 +1,5 @@
 import path from 'path';
+import Alias from 'require-alias'
 
 /**
  * Setup base module
@@ -7,13 +8,19 @@ import path from 'path';
 module.exports = function() {
 
   /**
-   * Aliases
-   * @type {String}
+   * Setup aliases
    */
-  global['@app']         = path.resolve();
-  global['@views']       = path.resolve('./views');
-  global['@config']      = path.resolve('./config');
-  global['@public']		 = path.resolve('./public');
-  global['@controllers'] = path.resolve('./controllers');
-  global['@middlewares'] = path.resolve('./middlewares');
+  global.alias = new Alias({
+    root: `${path.resolve()}/`,
+
+    aliases: {
+      '@views'       : 'views',
+      '@config'      : 'config',
+      '@public'      : 'public',
+      '@helpers'     : 'helpers',
+      '@runtime'     : 'runtime',
+      '@controllers' : 'controllers',
+      '@middlewares' : 'middlewares'
+    }
+  });
 }();

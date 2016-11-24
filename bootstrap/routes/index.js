@@ -1,4 +1,4 @@
-import _rConf from '../../config/routes.json';
+const _rConf = alias.require('@config/routes.json');
 
 /**
  * Configurating all routes
@@ -9,8 +9,6 @@ import _rConf from '../../config/routes.json';
 class RouterConfigurator {
 
   constructor(routesConfig) {
-
-    this.controllersBasePath = global['@controllers'];
 
     this.routesConfig = routesConfig;
 
@@ -38,7 +36,7 @@ class RouterConfigurator {
        * Save controller 
        * instance
        */
-      this.controllersMap[controllerName] = require(`${this.controllersBasePath}/${controllerName}`);
+      this.controllersMap[controllerName] = alias.require(`@controllers/${controllerName}`);
 
       /**
        * Bind current controller 

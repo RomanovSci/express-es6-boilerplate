@@ -5,7 +5,7 @@ import nconf from 'nconf';
 nconf.argv()
   .env()
   .file({
-    file: path.resolve(global['@config'], 'main.json')
+    file: alias.path('@config/main.json')
   });
 
 module.exports = nconf;
