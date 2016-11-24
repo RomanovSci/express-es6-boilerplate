@@ -11,16 +11,19 @@ module.exports = function() {
    * Setup aliases
    */
   global.alias = new Alias({
-    root: `${path.resolve()}/`,
+    root: `${path.resolve()}`,
 
     aliases: {
-      '@views'       : 'views',
-      '@config'      : 'config',
-      '@public'      : 'public',
-      '@helpers'     : 'helpers',
-      '@runtime'     : 'runtime',
-      '@controllers' : 'controllers',
-      '@middlewares' : 'middlewares'
+      '@app'         : '',
+      '@views'       : '/views',
+      '@config'      : '/config',
+      '@public'      : '/public',
+      '@errors'      : '/errors',
+      '@helpers'     : '/helpers',
+      '@runtime'     : '/runtime',
+      '@bootstrap'   : '/bootstrap',
+      '@controllers' : '/controllers',
+      '@middlewares' : '/middlewares'
     }
   });
 }();

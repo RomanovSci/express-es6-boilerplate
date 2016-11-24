@@ -1,59 +1,73 @@
-/**
- * Listeners module
- * @param  {Object} debug  Debug instance
- * @param  {Object} server Http server instance
- * @param  {Number} port   
- * @return {none}
- */
-module.exports = function(debug, server, port) {
+export default class Listeners {
 
-  return {
+  constructor(server, port) {
     
-    /**
-     * Event listener for HTTP 
-     * server "error" event.
-     */
-    onError: function(error) {
-      
-      if(error.syscall !== 'listen') {
-        throw error;
-      }
+    this.server = server;
 
-      let bind = typeof port === 'string'
-        ? 'Pipe ' + port
-        : 'Port ' + port;
+    this.port = port;
 
-      /**
-       * Handle specific listen 
-       * errors with friendly messages
-       */
-      switch(error.code) {
-        case 'EACCES':
-          console.error(bind + ' requires elevated privileges');
-          process.exit(1);
-          break;
+    this.init();
+  }
 
-        case 'EADDRINUSE':
-          console.error(bind + ' is already in use');
-          process.exit(1);
-          break;
+  /**
+   * Initialization
+   * @return {none}
+   */
+  init() {
 
-        default:
-          throw error;
-      }
-    },
-    
-    /**
-     * Event listener for HTTP 
-     * server "listening" event.
-     */
-    onListening: function() {
-      let addr = server.address();
-      let bind = typeof addr === 'string'
-        ? 'pipe ' + addr
-        : 'port ' + addr.port;
-    
-      console.log('Listening on ' + bind);
+    if(!this.server || !this.port) {
+
+      console.error('Listeners class requireвd server and port params');
+      return;
     }
-  };
+  }
+
+  /**
+   * On error callback
+   * @param  {Object} error
+   * @return {none}
+   */
+  onError(error) {
+    if(error.syscall !== 'listen') {
+      throw error;
+    }
+
+    let bind = (typeof this.port === 'string')
+      ? 'Pipe ' + this.port
+      : 'Port ' + this.port;
+
+    /**
+     * Handle specific listen 
+     * errors with friendly messages
+     */
+    switch(error.code) {
+      case 'EACCES':
+      {
+        console.error(bind + ' requires elevated privileges');
+        process.exit(1);
+        break;
+      }
+      case 'EADDRINUSE':
+      {
+        console.error(bind + ' is already in use');
+        process.exit(1);
+        break;
+      }
+      default:
+        throw error;
+    }
+  }
+
+  /**
+   * Event listener for HTTP 
+   * server "listening" event.
+   */
+  onListening() {
+    let addr = this.server.address();
+    let bind = (typeof addr === 'string')
+      ? 'pipe ' + addr
+      : 'port ' + addr.port;
+  
+    console.log('Listening on ' + bind);
+  }
 };
