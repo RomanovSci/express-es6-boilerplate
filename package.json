@@ -5,7 +5,7 @@
   "version": "0.0.2",
   "scripts": {
     "dev": "nodemon app.js --exec babel-node --presets es2015,stage-2",
-    "start": "babel-node app.js --presets es2015,stage-2"
+    "prod": "NODE_ENV=production babel-node app.js --presets es2015,stage-2"
   },
   "main": "app.js",
   "dependencies": {
