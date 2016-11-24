@@ -1,3 +1,5 @@
+import './bootstrap';
+
 import http from 'http';
 import express from 'express';
 import path from 'path';
@@ -9,7 +11,7 @@ import robots from 'robots.txt';
 import stringHelper from './helpers/stringHelper';
 import createDebugInstance from 'debug';
 import getListeners from './helpers/listeners';
-import config from './config';
+import config from './bootstrap/config';
 
 let port = stringHelper.normalizePort(process.env.PORT || config.get('port'));
 let debug = createDebugInstance('testing-server:server');
@@ -33,7 +35,7 @@ server.on('listening', listeners.onListening);
  * View engine setup
  */
 app.engine('ejs', require('ejs-locals'));
-app.set('views', path.join(__dirname, 'templates'));
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 /**
@@ -55,7 +57,7 @@ require('./middlewares')(app);
 /**
  * Setup routes
  */
-app.use(require('./routes'));
+app.use(require('./bootstrap/routes'));
 
 /**
  * Setup error handlers

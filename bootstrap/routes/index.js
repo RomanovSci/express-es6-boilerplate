@@ -1,3 +1,5 @@
+import _rConf from '../../config/routes.json';
+
 /**
  * Configurating all routes
  * in app by routes config
@@ -8,7 +10,7 @@ class RouterConfigurator {
 
   constructor(routesConfig) {
 
-    this.controllersBasePath = '../controllers/';
+    this.controllersBasePath = global['@controllers'];
 
     this.routesConfig = routesConfig;
 
@@ -36,7 +38,7 @@ class RouterConfigurator {
        * Save controller 
        * instance
        */
-      this.controllersMap[controllerName] = require(`${this.controllersBasePath}${controllerName}`);
+      this.controllersMap[controllerName] = require(`${this.controllersBasePath}/${controllerName}`);
 
       /**
        * Bind current controller 
@@ -71,13 +73,13 @@ class RouterConfigurator {
   }
 }
 
-module.exports = function(routesConfig) {
+module.exports = (function(rcnf) {
 
   /**
    * Return empty 
    * Router instance
    */
-  if(!routesConfig) {
+  if(!rcnf) {
     return require('express').Router();
   }
 
@@ -85,5 +87,5 @@ module.exports = function(routesConfig) {
    * Return configurated
    * Router instance
    */
-  return new RouterConfigurator(routesConfig).routerInstance;
-};
+  return new RouterConfigurator(rcnf).routerInstance;
+})(_rConf);
