@@ -1,7 +1,5 @@
-import './bootstrap';
-
+import alias        from './bootstrap/alias';
 import config       from './bootstrap/config';
-import stringHelper from './helpers/stringHelper';
 import Listeners    from './helpers/listeners';
 
 import http         from 'http';
@@ -13,7 +11,7 @@ import bodyParser   from 'body-parser';
 import robots       from 'robots.txt';
 
 let app = express();
-let port = stringHelper.normalizePort(process.env.PORT || config.get('port'));
+let port = process.env.PORT || config.get('port');
 let server = http.createServer(app);
 let listeners = new Listeners(server, port);
 
@@ -23,14 +21,14 @@ let listeners = new Listeners(server, port);
 app.set('port', port);
 
 /**
- * Http server setup
+ * Setup http server
  */
 server.listen(port);
 server.on('error', listeners.onError.bind(listeners));
 server.on('listening', listeners.onListening.bind(listeners));
 
 /**
- * View engine setup
+ * Setup view engine
  */
 app.engine('ejs', require('ejs-locals'));
 app.set('views', alias.path('@views'));

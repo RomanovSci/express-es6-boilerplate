@@ -1,3 +1,4 @@
+import alias from './alias';
 const _rConf = alias.require('@config/routes.json');
 
 /**
