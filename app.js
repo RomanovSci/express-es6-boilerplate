@@ -1,5 +1,5 @@
-import alias        from './bootstrap/alias';
-import config       from './bootstrap/config';
+import alias        from './components/alias';
+import config       from './components/config';
 import Listeners    from './helpers/listeners';
 
 import http         from 'http';
@@ -55,7 +55,7 @@ alias.require('@middlewares')(app);
 /**
  * Setup routes
  */
-app.use(alias.require('@bootstrap/routes'));
+app.use(alias.require('@components/routes'));
 
 /**
  * Setup error handlers
