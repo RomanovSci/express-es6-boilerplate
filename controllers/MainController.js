@@ -1,3 +1,6 @@
+import alias from '../components/alias';
+const logger = alias.require('@components/logger');
+
 /**
  * Main controller class
  */

@@ -9,13 +9,14 @@ module.exports = new Alias({
 
   aliases: {
     '@app'         : '',
+    '@logs'        : '/runtime/logs',
     '@views'       : '/views',
     '@config'      : '/config',
     '@public'      : '/public',
     '@errors'      : '/errors',
     '@helpers'     : '/helpers',
     '@runtime'     : '/runtime',
-    '@components'   : '/components',
+    '@components'  : '/components',
     '@controllers' : '/controllers',
     '@middlewares' : '/middlewares'
   }
