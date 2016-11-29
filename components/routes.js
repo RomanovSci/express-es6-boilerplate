@@ -46,7 +46,7 @@ class RouterConfigurator {
       Object.keys(this.routesConfig[controllerName]).map((action) => {
         let actionFunction = this.controllersMap[controllerName][action];
 
-        if(typeof actionFunction !== 'function') {
+        if (typeof actionFunction !== 'function') {
           throw new Error(`Action ${action} in ${controllerName} does not exist`);
         }
 
@@ -57,7 +57,7 @@ class RouterConfigurator {
         Object.keys(this.routesConfig[controllerName][action]).map((route) => {
           let methods = this.routesConfig[controllerName][action][route];
 
-          if(!(methods instanceof Array)) {
+          if (!(methods instanceof Array)) {
             throw new Error(`Methods in routesConfig for ${controllerName}.${action}.${route} must be Array`);
           }
 
@@ -78,7 +78,7 @@ module.exports = (function(rcnf) {
    * Return empty 
    * Router instance
    */
-  if(!rcnf) {
+  if (!rcnf) {
     return require('express').Router();
   }
 

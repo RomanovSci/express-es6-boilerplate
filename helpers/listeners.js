@@ -15,7 +15,7 @@ export default class Listeners {
    */
   init() {
 
-    if(!this.server || !this.port) {
+    if (!this.server || !this.port) {
 
       console.error('Listeners class requireвd server and port params');
       return;
@@ -28,7 +28,7 @@ export default class Listeners {
    * @return {none}
    */
   onError(error) {
-    if(error.syscall !== 'listen') {
+    if (error.syscall !== 'listen') {
       throw error;
     }
 
@@ -40,7 +40,7 @@ export default class Listeners {
      * Handle specific listen 
      * errors with friendly messages
      */
-    switch(error.code) {
+    switch (error.code) {
       case 'EACCES':
       {
         console.error(bind + ' requires elevated privileges');
