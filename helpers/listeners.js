@@ -70,4 +70,4 @@ export default class Listeners {
   
     console.log('Listening on ' + bind);
   }
-};
+}
