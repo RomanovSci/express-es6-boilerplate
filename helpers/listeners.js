@@ -32,9 +32,7 @@ export default class Listeners {
       throw error;
     }
 
-    let bind = (typeof this.port === 'string')
-      ? 'Pipe ' + this.port
-      : 'Port ' + this.port;
+    let bind = (typeof this.port === 'string') ? 'Pipe ' + this.port : 'Port ' + this.port;
 
     /**
      * Handle specific listen 
@@ -64,9 +62,7 @@ export default class Listeners {
    */
   onListening() {
     let addr = this.server.address();
-    let bind = (typeof addr === 'string')
-      ? 'pipe ' + addr
-      : 'port ' + addr.port;
+    let bind = (typeof addr === 'string') ? 'pipe ' + addr : 'port ' + addr.port;
   
     console.log('Listening on ' + bind);
   }
