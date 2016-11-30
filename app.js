@@ -61,3 +61,7 @@ app.use(alias.require('@components/routes'));
  * Setup error handlers
  */
 alias.require('@errors')(app);
+
+if (app.get('env') === 'test') {
+  process.exit(0);
+}
