@@ -1,5 +1,5 @@
 import path from 'path';
-import Alias from 'require-alias'
+import Alias from 'require-alias';
 
 /**
  * Setup aliases
