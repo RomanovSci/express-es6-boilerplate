@@ -4,8 +4,9 @@
   "author": "Roman Bylbas <romka.bulbas@gmail.com>",
   "version": "0.0.2",
   "scripts": {
-    "dev": "nodemon app.js --exec babel-node",
-    "prod": "NODE_ENV=production PORT=3000 babel-node app.js"
+    "test" : "NODE_ENV=test babel-node app.js"
+    "dev"  : "nodemon app.js --exec babel-node",
+    "prod" : "NODE_ENV=production PORT=3000 babel-node app.js"
   },
   "main": "app.js",
   "dependencies": {
