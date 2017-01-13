@@ -1,51 +1,78 @@
-/**
- * Error main module
- * @param  {Object} app  Express application
- * @return {none}
- */
-module.exports = function(app) {
+import alias from '../components/alias';
+const log = alias.require('@components/logger');
+
+module.exports = class ErrorHandler {
+
+  constructor(app) {
+
+    this.app = app;
+
+    this.init();
+  }
 
   /**
-   * Catch 404 and forward to error handler
+   * Error handlers
+   * initialization
    */
-  app.use(function(req, res, next) {
-    let err = new Error('Not Found');
-    
-    err.status = 404;
-    next(err);
-  });
+  init() {
 
-  /**
-   * Development error handler
-   * Will print stacktrace
-   */
-  if (app.get('env') === 'development') {
-    
-    app.use(function(err, req, res, next) {
-      res.status(err.status || 500);
+    let handlers = [
+      'notFoundException',
+      'renderErrorPage'
+    ];
 
-      res.render('error', {
-        title: 'Error',
-        message: err.message,
-        error: err
-      });
+    /**
+     * Register handlers
+     * in application
+     */
+    handlers.forEach((handler) => {
+
+      this.app.use(this[handler].bind(this));
     });
   }
 
   /**
-   * Production error handler
-   * No stacktraces leaked to user
+   * Not found error handler
+   * @param object req
+   * @param object res
+   * @param function next
+   * @return undefined
    */
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
+  notFoundException(req, res, next) {
+    let err = new Error('Not Found');
     
-    res.render('error', {
+    err.status = 404;
+    next(err);
+  }
+
+  /**
+   * Render error page
+   * @param object err
+   * @param object req
+   * @param object res
+   * @param function next
+   * @return undefined
+   */
+  renderErrorPage(err, req, res, next) {
+
+    let errorTplProps = {
       title: 'Error',
       message: err.message,
-      error: {
+      error: err
+    }
+
+    // console.log('Error handler');
+    // console.dir(err);
+
+    if (this.app.get('env') === 'production') {
+
+      errorTplProps.error = {
         status: err.status,
         stack: ''
-      }
-    });
-  });
-};
+      };
+    }
+
+    res.status(err.status || 500);
+    res.render('error', errorTplProps);
+  }
+}

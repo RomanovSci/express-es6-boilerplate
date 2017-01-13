@@ -16,6 +16,7 @@ module.exports = new Alias({
     '@errors'      : '/errors',
     '@helpers'     : '/helpers',
     '@runtime'     : '/runtime',
+    '@bootstrap'   : '/bootstrap',
     '@components'  : '/components',
     '@controllers' : '/controllers',
     '@middlewares' : '/middlewares'
