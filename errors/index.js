@@ -59,7 +59,7 @@ module.exports = class ErrorHandler {
       title: 'Error',
       message: err.message,
       error: err
-    }
+    };
 
     // console.log('Error handler');
     // console.dir(err);
@@ -75,4 +75,4 @@ module.exports = class ErrorHandler {
     res.status(err.status || 500);
     res.render('error', errorTplProps);
   }
-}
+};
