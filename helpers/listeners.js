@@ -57,13 +57,13 @@ export default class Listeners {
   }
 
   /**
-   * Event listener for HTTP 
+   * Event listener for HTTP
    * server "listening" event.
    */
   onListening() {
     let addr = this.server.address();
     let bind = (typeof addr === 'string') ? 'pipe ' + addr : 'port ' + addr.port;
-  
+    
     console.log('Listening on ' + bind);
   }
 }
