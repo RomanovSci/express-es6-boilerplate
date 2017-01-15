@@ -14,6 +14,7 @@ let app = express();
 let port = process.env.PORT || config.get('port');
 let server = http.createServer(app);
 let listeners = new Listeners(server, port);
+let ErrorHandler = alias.require('@errors');
 
 /**
  * Set port
@@ -55,12 +56,12 @@ alias.require('@middlewares')(app);
 /**
  * Setup routes
  */
-app.use(alias.require('@components/routes'));
+app.use(alias.require('@bootstrap/routes'));
 
 /**
  * Setup error handlers
  */
-alias.require('@errors')(app);
+let errorHandlerInstance = new ErrorHandler(app);
 
 if (app.get('env') === 'test') {
   process.exit(0);

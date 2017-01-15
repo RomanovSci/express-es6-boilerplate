@@ -1,3 +1,6 @@
+import alias from '../components/alias';
+const logger = alias.require('@components/logger');
+
 /**
  * Main controller class
  */
@@ -20,7 +23,7 @@ class MainController {
    * @return {none}       
    */
   index(req, res, next) {
-    
+
     res.render('index', {
       'title': 'Express ES6 Boilerplate'
     });
