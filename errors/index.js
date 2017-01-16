@@ -61,9 +61,6 @@ module.exports = class ErrorHandler {
       error: err
     };
 
-    // console.log('Error handler');
-    // console.dir(err);
-
     if (this.app.get('env') === 'production') {
 
       errorTplProps.error = {
@@ -71,6 +68,18 @@ module.exports = class ErrorHandler {
         stack: ''
       };
     }
+
+    /**
+     * Send error
+     * via email
+     */
+    log.error(JSON.stringify({
+      message : err.message,
+      error   : {
+        status: err.status,
+        stack : err.stack
+      }
+    }));
 
     res.status(err.status || 500);
     res.render('error', errorTplProps);

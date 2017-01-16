@@ -1,9 +1,7 @@
 {
-  "port": 7000,
-  "db": {
-  	"name": 	"node-test",
-  	"host": 	"localhost",
-  	"user": 	"root",
-  	"password": "toor"
+  "port" : 7000,
+  "mail" : {
+  	"admin"  : "example@mail.com",
+  	"report" : "romka.bulbas@gmail.com"  
   }
 }
