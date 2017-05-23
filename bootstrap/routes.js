@@ -64,7 +64,10 @@ class RouterConfigurator {
           methods.forEach((method) => {
             let _m = method.toLowerCase();
             
-            this.routerInstance[_m](route, actionFunction);
+            this.routerInstance[_m](
+                route,
+                actionFunction.bind(this.controllersMap[controllerName])
+            );
           });
         });
       });
