@@ -17,7 +17,7 @@
     "babel-register": "^6.18.0",
     "body-parser": "~1.15.2",
     "cookie-parser": "~1.4.3",
-    "debug": "~2.3.3",
+    "debug": "~2.6.9",
     "ejs-locals": "^1.0.2",
     "express": "~4.14.0",
     "mysql": "^2.12.0",
