@@ -1,46 +1,38 @@
 import alias from '../components/alias';
-const _rConf = alias.require('@config/routes.json');
+
+const ROUTES_CONFIG = alias.require('@config/routes.json');
 
 /**
- * Configurating all routes
- * in app by routes config
- * 
+ * Setup all routes in app by routes config
  * @param {Object} routesConfig
  */
 class RouterConfigurator {
-
   constructor(routesConfig) {
-
     this.routesConfig = routesConfig;
-
     this.routerInstance = require('express').Router();
-
     this.controllersMap = {};
-
     this.init();
   }
 
   /**
    * Initialization
-   * @return {none}
+   * @return void
    */
   init() {
-
     /**
      * Booting all controllers
      * and bind action to Express
      * Router Object
      */
     Object.keys(this.routesConfig).map((controllerName) => {
-      
       /**
-       * Save controller 
+       * Save controller
        * instance
        */
       this.controllersMap[controllerName] = alias.require(`@controllers/${controllerName}`);
 
       /**
-       * Bind current controller 
+       * Bind current controller
        * actions to Router instance
        */
       Object.keys(this.routesConfig[controllerName]).map((action) => {
@@ -62,9 +54,9 @@ class RouterConfigurator {
           }
 
           methods.forEach((method) => {
-            let _m = method.toLowerCase();
+            const METHOD = method.toLowerCase();
             
-            this.routerInstance[_m](
+            this.routerInstance[METHOD](
                 route,
                 actionFunction.bind(this.controllersMap[controllerName])
             );
@@ -75,13 +67,12 @@ class RouterConfigurator {
   }
 }
 
-module.exports = (function(rcnf) {
-
+module.exports = (function (ROUTES_CONFIG) {
   /**
-   * Return empty 
+   * Return empty
    * Router instance
    */
-  if (!rcnf) {
+  if (!ROUTES_CONFIG) {
     return require('express').Router();
   }
 
@@ -89,5 +80,5 @@ module.exports = (function(rcnf) {
    * Return configurated
    * Router instance
    */
-  return new RouterConfigurator(rcnf).routerInstance;
-})(_rConf);
+  return new RouterConfigurator(ROUTES_CONFIG).routerInstance;
+})(ROUTES_CONFIG);
